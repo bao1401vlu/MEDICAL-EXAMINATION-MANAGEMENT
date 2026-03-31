@@ -21,11 +21,32 @@ export function render() {
     }, 3000);
   };
 
+  const showInquiryForm = () => {
+    const formContent = `
+      <div style="text-align: left; margin-top: 1.5rem;">
+        <div class="form-group">
+          <label style="display: block; font-weight: 700; margin-bottom: 8px;">Subject</label>
+          <select style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit;">
+            <option>Medical Advice</option>
+            <option>Billing Inquiry</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top: 1.5rem;">
+          <label style="display: block; font-weight: 700; margin-bottom: 8px;">Message</label>
+          <textarea placeholder="Type your inquiry here..." style="width: 100%; height: 120px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; resize: none;"></textarea>
+        </div>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 1rem;">This is a secure connection with clinic staff. Responses usually arrive within 24 hours.</p>
+      </div>
+    `;
+    window.showModal('Secure Clinic Message', formContent);
+  };
+
   const updateUI = () => {
     container.innerHTML = `
         <section style="background: linear-gradient(135deg, var(--primary) 0%, #06B6D4 100%); padding: 3rem; border-radius: 24px; color: white; margin-bottom: 3rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 166, 251, 0.2);">
           <div style="position: relative; z-index: 2;">
-            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: white;">${window.t('hello')}, John Doe! 👋</h1>
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: white;">${window.t('hello')}, ${window.state.userName}! 👋</h1>
             <p style="font-size: 1.125rem; opacity: 0.9;">${window.t('today_summary')}</p>
           </div>
           <svg style="position: absolute; right: -50px; bottom: -50px; opacity: 0.1; color: white;" width="300" height="300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
@@ -56,13 +77,13 @@ export function render() {
             <div>
               <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">${window.t('lab_results')}</h2>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                 <div class="card" style="display: flex; align-items: center; gap: 1.5rem; cursor: pointer;" onclick="showNotification('${window.t('opening_doc')}')">
+                 <div class="card" style="display: flex; align-items: center; gap: 1.5rem; cursor: pointer;" onclick="window.location.hash = '#/health-record'">
                    <div style="width: 52px; height: 52px; background: #F0F9FF; color: var(--primary); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                    </div>
                    <div><p style="font-weight: 700;">${window.t('blood_test')}</p><p style="font-size: 0.8125rem; color: #10B981; font-weight: 700;">${window.t('normal')}</p></div>
                  </div>
-                 <div class="card" style="display: flex; align-items: center; gap: 1.5rem; cursor: pointer;" onclick="showNotification('${window.t('opening_doc')}')">
+                 <div class="card" style="display: flex; align-items: center; gap: 1.5rem; cursor: pointer;" onclick="window.location.hash = '#/health-record'">
                    <div style="width: 52px; height: 52px; background: #ECFDF5; color: #10B981; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                    </div>
@@ -88,7 +109,7 @@ export function render() {
                   <div><p style="font-weight: 700; font-size: 1.125rem;">Dr. James Wilson</p></div>
                 </div>
                 <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 12px;">
-                  <button class="btn-primary" style="padding: 12px; font-size: 0.875rem;" onclick="showNotification('${window.t('opening_doc')}')">${window.t('view_instructions')}</button>
+                  <button id="view-instr-btn" class="btn-primary" style="padding: 12px; font-size: 0.875rem;">${window.t('view_instructions')}</button>
                   <button class="btn-secondary" style="padding: 12px; font-size: 0.875rem;" onclick="window.location.hash='#/book'">${window.t('reschedule')}</button>
                 </div>
               </div>
@@ -96,13 +117,22 @@ export function render() {
             <div>
               <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">${window.t('quick_tools')}</h2>
               <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                <button class="card" onclick="showNotification('${window.t('simulating')}')" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 1.75rem; text-align: left; cursor: pointer; border: 1px solid var(--border-color);"><span style="font-size: 2rem;">💬</span><div><p style="font-weight: 800; font-size: 1.125rem;">${window.t('ask_specialist')}</p></div></button>
-                <button class="card" onclick="showNotification('${window.t('opening_doc')}')" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 1.75rem; text-align: left; cursor: pointer; border: 1px solid var(--border-color);"><span style="font-size: 2rem;">📁</span><div><p style="font-weight: 800; font-size: 1.125rem;">${window.t('manage_docs')}</p></div></button>
+                <button id="ask-btn" class="card" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 1.75rem; text-align: left; cursor: pointer; border: 1px solid var(--border-color);"><span style="font-size: 2rem;">💬</span><div><p style="font-weight: 800; font-size: 1.125rem;">${window.t('ask_specialist')}</p></div></button>
               </div>
             </div>
           </div>
         </div>
     `;
+
+    // Quick Tool Event
+    const askBtn = container.querySelector('#ask-btn');
+    if (askBtn) askBtn.addEventListener('click', showInquiryForm);
+
+    // View Instructions Event
+    const instrBtn = container.querySelector('#view-instr-btn');
+    if (instrBtn) instrBtn.addEventListener('click', () => {
+      window.showModal(window.t('view_instructions'), window.t('tip_content'));
+    });
 
     const btn = container.querySelector('#med-btn'); 
     if (btn) btn.addEventListener('click', () => { 

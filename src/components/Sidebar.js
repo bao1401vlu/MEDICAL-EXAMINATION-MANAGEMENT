@@ -15,7 +15,8 @@ export function renderSidebar(activeHash) {
   const navItems = [
     { label: 'home', hash: '#/dashboard', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
     { label: 'appointments', hash: '#/appointments', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
-    { label: 'find_doctor', hash: '#/search', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>' },
+    { label: 'find_doctor', hash: '#/search', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' },
+    { label: 'health_record', hash: '#/health-record', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>' },
   ];
 
   sidebar.innerHTML = `
@@ -36,6 +37,11 @@ export function renderSidebar(activeHash) {
           </a>
         `;
       }).join('')}
+      
+      <button onclick="window.logout()" style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 14px; color: #EF4444; background: transparent; font-weight: 600; transition: all 0.2s; text-align: left; width: 100%;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        ${window.t('logout')}
+      </button>
     </nav>
 
     <div style="padding: 1.5rem; background: #F8FAFC; border-radius: 16px; margin-top: 2rem;">

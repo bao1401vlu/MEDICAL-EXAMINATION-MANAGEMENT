@@ -111,7 +111,17 @@ export const translations = {
     pay_now: "Thanh toán ngay",
     credit_card: "Thẻ tín dụng",
     e_wallet: "Ví điện tử",
-    bank_transfer: "Chuyển khoản"
+    bank_transfer: "Chuyển khoản",
+    wrong_password: "Mật khẩu không chính xác. Vui lòng thử lại.",
+    booked: "Đã được đặt",
+    health_record: "Hồ sơ sức khỏe",
+    blood_type: "Nhóm máu",
+    allergies: "Dị ứng",
+    diagnosis: "Chẩn đoán",
+    no_known_allergies: "Không có dị ứng",
+    cancel_error_24h: "Không thể hủy lịch trong vòng 24 giờ trước giờ hẹn.",
+    status: "Trạng thái",
+    paid: "Đã thanh toán"
   },
   en: {
     // General
@@ -127,7 +137,7 @@ export const translations = {
     settings: "Settings",
     logout: "Log Out",
     back: "Back",
-    currency: "$",
+    currency: "₫",
 
     // Auth screens
     create_account: "Create Account",
@@ -225,6 +235,16 @@ export const translations = {
     pay_now: "Pay Now",
     credit_card: "Credit Card",
     e_wallet: "E-Wallet",
-    bank_transfer: "Bank Transfer"
+    bank_transfer: "Bank Transfer",
+    wrong_password: "Incorrect password. Please try again.",
+    booked: "Slot Taken",
+    health_record: "My Health Record",
+    blood_type: "Blood Type",
+    allergies: "Allergies",
+    diagnosis: "Diagnosis",
+    no_known_allergies: "No Known Allergies",
+    cancel_error_24h: "Cannot cancel within 24 hours.",
+    status: "Status",
+    paid: "Paid"
   }
 };

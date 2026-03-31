@@ -3,10 +3,10 @@ export function render() {
   container.className = 'search-page animate-fade-in';
   
   const doctors = [
-    { name: 'Dr. James Wilson', specialty: 'cardiology', img: '/src/assets/doctor_1.png', fee: 150 },
-    { name: 'Dr. Sarah Lee', specialty: 'dermatology', img: '/src/assets/doctor_2.png', fee: 120 },
-    { name: 'Dr. Robert Chen', specialty: 'neurology', img: '/src/assets/doctor_3.png', fee: 180 },
-    { name: 'Dr. Emily Watson', specialty: 'pediatrics', img: '/src/assets/doctor_4.png', fee: 100 }
+    { name: 'Dr. James Wilson', specialty: 'cardiology', img: '/src/assets/doctor_1.png', fee: 1500000 },
+    { name: 'Dr. Sarah Lee', specialty: 'dermatology', img: '/src/assets/doctor_2.png', fee: 1200000 },
+    { name: 'Dr. Robert Chen', specialty: 'neurology', img: '/src/assets/doctor_3.png', fee: 1800000 },
+    { name: 'Dr. Emily Watson', specialty: 'pediatrics', img: '/src/assets/doctor_4.png', fee: 1000000 }
   ];
 
   const selectDoctor = (doc) => {

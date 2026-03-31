@@ -52,7 +52,8 @@ export function render() {
     window.state.appointments.push({
       doctor: doctor.name,
       specialty: doctor.specialty,
-      dateTime: `${date} at ${time}`
+      dateTime: `${date} at ${time}`,
+      status: 'Paid'
     });
     
     const notification = document.createElement('div');

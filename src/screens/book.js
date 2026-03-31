@@ -35,7 +35,21 @@ export function render() {
             <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 1rem;">
               ${['09:00 AM', '10:30 AM', '02:00 PM', '04:00 PM'].map(time => {
                 const isSelected = selectedTime === time;
-                return `<button class="time-slot-btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" data-time="${time}" style="padding: 18px; font-weight: 700; font-size: 1rem; ${isSelected ? 'box-shadow: 0 8px 16px rgba(0, 166, 251, 0.2);' : ''}">${time}</button>`;
+                const isBooked = window.state.appointments.some(app => 
+                  app.doctor === doctor.name && 
+                  app.dateTime === `${selectedDate} at ${time}`
+                );
+                
+                return `
+                  <button 
+                    class="time-slot-btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" 
+                    data-time="${time}" 
+                    ${isBooked ? 'disabled' : ''}
+                    style="padding: 18px; font-weight: 700; font-size: 1rem; position: relative; ${isSelected ? 'box-shadow: 0 8px 16px rgba(0, 166, 251, 0.2);' : ''} ${isBooked ? 'opacity: 0.5; cursor: not-allowed; background: #F1F5F9; border-color: #E2E8F0; color: #94A3B8; text-decoration: line-through;' : ''}"
+                  >
+                    ${time} ${isBooked ? `(${window.t('booked') || 'Unavailable'})` : ''}
+                  </button>
+                `;
               }).join('')}
             </div>
             <button id="confirm-btn" class="btn-primary" style="margin-top: 4rem; padding: 20px; font-size: 1.125rem; font-weight: 800; border-radius: 100px; box-shadow: 0 12px 24px rgba(0, 166, 251, 0.3);">${window.t('confirm_appointment')}</button>
